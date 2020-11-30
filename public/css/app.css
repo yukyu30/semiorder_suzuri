@@ -5837,6 +5837,7 @@ button.dropdown-item.is-active {
   min-height: 3.25rem;
   position: relative;
   z-index: 30;
+  border-bottom: solid 1px #CAA96A;
 }
 
 .navbar.is-white {
@@ -6556,7 +6557,6 @@ button.dropdown-item.is-active {
   position: fixed;
   right: 0;
   z-index: 30;
-  border-bottom: 1px solid #CAA96A;
 }
 
 .navbar.is-fixed-bottom {
@@ -6792,7 +6792,6 @@ a.navbar-item.is-active,
     position: fixed;
     right: 0;
     z-index: 30;
-    border-bottom: 1px solid #CAA96A;
   }
 
   .navbar.is-fixed-bottom-touch {
@@ -7015,7 +7014,6 @@ a.navbar-item.is-active,
     position: fixed;
     right: 0;
     z-index: 30;
-    border-bottom: 1px solid #CAA96A;
   }
 
   .navbar.is-fixed-bottom-desktop {
@@ -12790,7 +12788,8 @@ a.has-text-danger-dark:focus {
 }
 
 .footer {
-  background-color: #A71B1B;
+  border-top: solid 1px #CAA96A;
+  background-color: #1A1A1A;
   padding: 3rem 1.5rem 6rem;
 }
 

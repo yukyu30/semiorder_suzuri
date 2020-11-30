@@ -39,7 +39,7 @@ class SemiOrderController extends Controller{
         $data = array(
             'texture' => $textureUrl,
             'title' => 'BECCHU',
-            'price' => 300,
+            'price' => 400,
         );
 
         $client = new Client();

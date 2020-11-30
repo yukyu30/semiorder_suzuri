@@ -1,0 +1,12 @@
+//Base color
+$sgold:#CAA96A;
+$sgold-light:#ebdec6;
+$sred:#A71B1B;
+$sred-light:#be3f3f;
+$sblack: #1A1A1A;
+$black: $sblack;
+$danger: $sred;
+$red: $sred;
+$primary: $sgold;
+$link: $sred;
+@import '~bulma/bulma.sass'

@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SemiOrderController::class, 'index']);
 Route::get('/create', [SemiOrderController::class, 'create']);
-Route::get('/make', [SemiOrderController::class, 'make']);
+Route::post('/make', [SemiOrderController::class, 'make']);

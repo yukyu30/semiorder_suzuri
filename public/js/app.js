@@ -91,9 +91,57 @@
   !*** ./resources/js/app.js ***!
   \*****************************/
 /*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./colorpicker.js */ "./resources/js/colorpicker.js");
+
+__webpack_require__(/*! ./navbar.js */ "./resources/js/navbar.js"); //require('./spectrum.js');
+
+/***/ }),
+
+/***/ "./resources/js/colorpicker.js":
+/*!*************************************!*\
+  !*** ./resources/js/colorpicker.js ***!
+  \*************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
+var pickr = Pickr.create({
+  el: '#color-picker',
+  theme: 'monolith',
+  // or 'monolith', or 'nano'
+  swatches: ['rgb(255, 255, 255)', 'rgb(0, 0, 0)', 'rgb(255, 0, 0)', 'rgb(0, 255, 0)', 'rgb(0, 0, 255)'],
+  components: {
+    // Main components
+    preview: true,
+    hue: true,
+    opacity: false,
+    // Input / output Options
+    interaction: {
+      hex: true,
+      rgb: true,
+      input: true,
+      clear: true,
+      save: true
+    }
+  }
+});
 
+/***/ }),
+
+/***/ "./resources/js/navbar.js":
+/*!********************************!*\
+  !*** ./resources/js/navbar.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $(".navbar-burger").click(function () {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+  });
+});
 
 /***/ }),
 

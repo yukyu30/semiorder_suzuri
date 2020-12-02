@@ -13,20 +13,12 @@
         
     <div class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item" href="#profile">
-                <p class="is-size-5">About</p>
-            </a>
-        
-            <a class="navbar-item" href="#skills">
+            <a class="navbar-item" href="https://suzuri.jp/yukyu_konpeki_dou">
                 <p class="is-size-5">OnlineStore</p>
             </a>
 
-            <a class="navbar-item" href="#links">
-                <p class="is-size-5">links</p>
-            </a>
-
-            <a class="navbar-item" href="#contact">
-                <p class="is-size-5">contact</p>
+            <a class="navbar-item" href="https://yu-9.work/#contact">
+                <p class="is-size-5">Contact</p>
             </a>
         </div>
     </div>

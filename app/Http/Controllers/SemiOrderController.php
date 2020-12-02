@@ -5,30 +5,38 @@ use App\Lib\SuzuriAPI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 
 class SemiOrderController extends Controller{
 
     
 
     public function index(){
-        return view('pages.index');
+        return view( 'pages.index' );
     }
-    public function create(Request $parameter) {
 
-        if($parameter->input('item') == NULL){
-            return view('pages.selectItem');
-        } elseif($parameter->input('designId') == NULL) {
-            return view('pages.selectDesign');
+    public function create( Request $parameter ) {
+
+        if( is_null($parameter->input( 'item' )) ){//アイテムを選択していない場合
+            $items = DB::table('items')->select('id', 'name', 'humanize_name', 'icon_path')->get();
+            return view('pages.selectItem', compact('items'));
+        } elseif( is_null($parameter->input( 'design' )) ) {
+            $designs = DB::table('designs')->select('uuid', 'title', 'file_path','created_at')->get();
+            return view('pages.selectDesign', compact('designs'));
         } else {
-            
-            return view('pages.customizeDesign');
+            $item = DB::table('items')->where('id', $parameter->input( 'item' ))->first();
+            $design = DB::table('designs')->where('uuid', $parameter->input( 'desgin' ))->first();
+            return view('pages.customizeDesign', [ 'item' => $item, 'design' => $design]);
         }
         
     }
-    public function make(Request $req){
+    public function make(Request $parameter){
         /* 本来はdesginIdから画像の保存場所を検索しもってく- DBで実装できる */
-        $imagesUrl=asset('./image/orignal/bakuro.png');
-        $color_hex = $req->input_color;
+        $item = DB::table('items')->where('id', $parameter->input( 'item' ))->first();
+        $design = DB::table('designs')->where('uuid', $parameter->input( 'desgin' ))->first();//将来表示する画像とSUZURIに投げる画像を変える
+
+        $imagesUrl=asset($design ->file_path);
+        $color_hex = $parameter->input_color;
         $color=[hexdec(substr($color_hex, 1, 2)), hexdec(substr($color_hex, 3, 2)), hexdec(substr($color_hex, 5, 2))];
         
         //---関数にする：引数$imagesUrl, $color

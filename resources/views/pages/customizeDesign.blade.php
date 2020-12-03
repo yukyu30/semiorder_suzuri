@@ -12,7 +12,7 @@
     <div class="column is-5 has-text-centered">
         <div class="has-background-white m-3">
             <p class="image">
-                <img src="{{asset($design->file_path)}}">
+                <img src="{{asset('/orignal/' . $design->file_path)}}">
             </p>
         </div>
     </div>

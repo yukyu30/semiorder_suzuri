@@ -16,7 +16,7 @@
                     <article class="tile is-child box">
                         <a href="{{ url('/create?item='. $item->id) }}">
                             <p class="image is-1by1">
-                                <img src="{{ $item->icon_path }}">
+                                <img src="{{asset('/icon/'. $item->icon_path)}}">
                             </p>
                             <p class="is-text-2 has-text-primary pt-3">{{ $item->humanize_name }}</p>
                         </a>

@@ -17,7 +17,7 @@
                         <a href="{{ (request()->fullUrl()).'&design='.$design->uuid }}">
                             <div class="has-background-white">
                                 <p class="image">
-                                    <img src="{{asset($design->file_path)}}">
+                                    <img src="{{asset('/orignal/'. $design->file_path)}}">
                                 </p>
                             </div>
                             <p class="is-text-2 has-text-primary py-3">{{ $design->title}}</p>

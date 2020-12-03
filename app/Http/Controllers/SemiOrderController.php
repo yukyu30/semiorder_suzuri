@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Lib\SuzuriAPI;
+use App\Models\design;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
@@ -25,17 +26,16 @@ class SemiOrderController extends Controller{
             return view('pages.selectDesign', compact('designs'));
         } else {
             $item = DB::table('items')->where('id', $parameter->input( 'item' ))->first();
-            $design = DB::table('designs')->where('uuid', $parameter->input( 'desgin' ))->first();
+            $design = DB::table('designs')->where('uuid', $parameter->input( 'design' ))->first();
             return view('pages.customizeDesign', [ 'item' => $item, 'design' => $design]);
         }
         
     }
     public function make(Request $parameter){
-        /* 本来はdesginIdから画像の保存場所を検索しもってく- DBで実装できる */
         $item = DB::table('items')->where('id', $parameter->input( 'item' ))->first();
-        $design = DB::table('designs')->where('uuid', $parameter->input( 'desgin' ))->first();//将来表示する画像とSUZURIに投げる画像を変える
-
-        $imagesUrl=asset($design ->file_path);
+        $design = DB::table('designs')->where('uuid', $parameter->input( 'design' ))->first();
+       
+        $imagesUrl=asset($design->file_path);
         $color_hex = $parameter->input_color;
         $color=[hexdec(substr($color_hex, 1, 2)), hexdec(substr($color_hex, 3, 2)), hexdec(substr($color_hex, 5, 2))];
         
@@ -49,9 +49,10 @@ class SemiOrderController extends Controller{
         
         //---ここまで関数にする
         header('Content-Type: image/png');
-        $path = imagepng($im,'./image/create/logo.png');
+        $makeImgaePath = $design->uuid . $color_hex . 'png';
+        $path = imagepng($im,'./image/create/'. $makeImgaePath);
         imagedestroy($im);
-        $textureUrl=asset('/image/create/logo.png');
+        $textureUrl=asset('./image/create/'. $makeImgaePath);
         $token = config('suzuri.suzuri_api_key');
 
         $data = [
@@ -64,7 +65,7 @@ class SemiOrderController extends Controller{
                         'title' => '馬喰電機-BECCHU-'.$color_hex,
                         'price' => 400,
                         'products' => [array(
-                            'itemId' => 1,
+                            'itemId' => $item->id,
                             'published' => true,
                         )],
                     ],

@@ -29,7 +29,7 @@
                 ],
                 'json' => [
                     'texture' => $textureUrl,
-                    'title' =>  $design->name.$suffix,
+                    'title' =>  $design->title . $suffix,
                     'price' => 400,
                     'products' => [array(
                         'itemId' => $item->id,

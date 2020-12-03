@@ -5,7 +5,8 @@
 @section('main')
 <div class="columns m-4 is-centered">
     <div class="column is-5 has-text-centered">
-        <p class="subtitle">色をカスタマイズしてください</p>
+        <p class="subtitle">色のカスタマイズ</p>
+        <p>お好みの色に変更してください<P>
     </div>
 </div>
 <div class="columns m-4 is-centered">

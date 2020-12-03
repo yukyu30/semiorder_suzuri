@@ -9,4 +9,9 @@ $danger: $sred;
 $red: $sred;
 $primary: $sgold;
 $link: $sred;
-@import '~bulma/bulma.sass'
+
+@import '~bulma/bulma.sass';
+
+.is-row-reverse{
+    flex-direction:row-reverse;
+}

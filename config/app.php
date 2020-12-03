@@ -226,6 +226,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'SuzuriAPI' => App\Lib\SuzuriAPI::class,
+        'ImageProc' => App\Lib\ImageProc::class,
     ],
 
 ];

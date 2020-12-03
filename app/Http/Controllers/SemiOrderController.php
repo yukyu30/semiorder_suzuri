@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Lib\SuzuriAPI;
+
 use App\Models\design;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\DB;
+/* 自作した関数 */
+use App\Lib\SuzuriAPI;
+use App\Lib\ImageProc;
 
 class SemiOrderController extends Controller{
 
@@ -26,7 +29,7 @@ class SemiOrderController extends Controller{
             return view('pages.selectDesign', compact('designs'));
         } else {
             $item = DB::table('items')->where('id', $parameter->input( 'item' ))->first();
-            $design = DB::table('designs')->where('uuid', $parameter->input( 'desgin' ))->first();
+            $design = DB::table('designs')->where('uuid', $parameter->input( 'design' ))->first();
             return view('pages.customizeDesign', [ 'item' => $item, 'design' => $design]);
         }
         
@@ -35,42 +38,17 @@ class SemiOrderController extends Controller{
         $item = DB::table('items')->where('id', $parameter->input( 'item' ))->first();
         $design = DB::table('designs')->where('uuid', $parameter->input( 'design' ))->first();
        
-        $imagesUrl=asset($design->file_path);
-        $color_hex = $parameter->input_color;
-        $color=[hexdec(substr($color_hex, 1, 2)), hexdec(substr($color_hex, 3, 2)), hexdec(substr($color_hex, 5, 2))];
+        $imageUrl=asset('orignal' . $design->file_path);// 画像の保存場所
+        $color_hex = $parameter->input_color; // カラーコード
+        $color=[hexdec(substr($color_hex, 1, 2)), hexdec(substr($color_hex, 3, 2)), hexdec(substr($color_hex, 5, 2))];//カラーコードをRGBの配列に変換
         
-        //---関数にする：引数$imagesUrl, $color
-        $imageSize = getimagesize($imagesUrl);
-        $im = imagecreatefrompng($imagesUrl);
-        imagesavealpha($im, true);//透明な部分は残す
-        imagelayereffect($im, IMG_EFFECT_OVERLAY);//グレーの色を変更する
-
-        imagefilledrectangle($im, 0, 0, $imageSize[0], $imageSize[1], imagecolorallocate($im, $color[0], $color[1], $color[2]));//色を変更
         
-        //---ここまで関数にする
-        header('Content-Type: image/png');
-        $makeImgaePath = $design->uuid . $color_hex . 'png';
-        $path = imagepng($im,'./image/create/'. $makeImgaePath);
-        imagedestroy($im);
-        $textureUrl=asset('./image/create/'. $makeImgaePath);
-        $token = config('suzuri.suzuri_api_key');
+        $generatedImage = ImageProc::changeColor($imageUrl, $color); //画像処理
 
-        $data = [
-                    'headers' => [
-                    'Authorization' => 'Bearer ' . $token,
-                    'Content-Type' => 'application/json',
-                    ],
-                    'json' => [
-                        'texture' => $textureUrl,
-                        'title' => '馬喰電機-BECCHU-'.$color_hex,
-                        'price' => 400,
-                        'products' => [array(
-                            'itemId' => $item->id,
-                            'published' => true,
-                        )],
-                    ],
-                ];
-                
+        $textureUrl = ImageProc::saveImage($generatedImage, 'generate', $design->uuid, $color_hex);//画像を保存し、そのパスを返す
+        
+        $data = SuzuriAPI::makeRequest($textureUrl, $design, $item, $color_hex);
+   
         $result = SuzuriAPI::sendRequest('POST', 'https://suzuri.jp/api/v1/materials', $data);
         
         return view('pages.make', compact('result'));

@@ -1,5 +1,5 @@
 $("#custom").spectrum({
-    color: "#f00",
+    color: "#ff0000",
     showInput:true, 
     preferredFormat:'hex',
     showSelectionPalette: true, 

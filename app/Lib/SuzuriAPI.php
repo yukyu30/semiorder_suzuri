@@ -20,6 +20,26 @@
             
             return $url;
         }
+        public static function makeRequest($textureUrl, $design, $item, $suffix){
+            $token = config('suzuri.suzuri_api_key');
+            $data = [
+                'headers' => [
+                'Authorization' => 'Bearer ' . $token,
+                'Content-Type' => 'application/json',
+                ],
+                'json' => [
+                    'texture' => $textureUrl,
+                    'title' =>  $design->name.$suffix,
+                    'price' => 400,
+                    'products' => [array(
+                        'itemId' => $item->id,
+                        'published' => true,
+                    )],
+                ],
+            ];
+
+            return $data;
+        }
     }
     
 ?>

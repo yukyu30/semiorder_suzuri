@@ -1,0 +1,3 @@
+<IfModule mod_rewrite.c>
+    SetEnvIf Host "becchu.yu-9.work" APP_ENV=prod
+</IfModule>

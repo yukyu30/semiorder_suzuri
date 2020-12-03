@@ -13,11 +13,11 @@
 
         public static function saveImage($image, $storge, $prefix, $suffix){
             header('Content-Type: image/png');
-            $imgaeName = $prefix . $suffix . 'png';
-            $textureUrl=asset('/'. $storge .'/'. $imgaeName);
-            $path = imagepng($image, $textureUrl);//画像として保存
+            $imageName = $prefix . $suffix . '.png';
+            $textureUrl='./dump/'. $imageName; // asset関数を使うと保存できないため使わない
+            imagepng($image, $textureUrl);//画像として保存
             imagedestroy($image);
-            return  $textureUrl=asset('/'. $storge .'/'. $imgaeName);
+            return asset('./dump/'. $imageName);
         }
     }
 ?>

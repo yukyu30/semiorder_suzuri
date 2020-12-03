@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\design;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 /* 自作した関数 */
 use App\Lib\SuzuriAPI;
@@ -38,7 +38,7 @@ class SemiOrderController extends Controller{
         $item = DB::table('items')->where('id', $parameter->input( 'item' ))->first();
         $design = DB::table('designs')->where('uuid', $parameter->input( 'design' ))->first();
        
-        $imageUrl=asset('orignal' . $design->file_path);// 画像の保存場所
+        $imageUrl=asset('/orignal/' . $design->file_path);// 画像の保存場所
         $color_hex = $parameter->input_color; // カラーコード
         $color=[hexdec(substr($color_hex, 1, 2)), hexdec(substr($color_hex, 3, 2)), hexdec(substr($color_hex, 5, 2))];//カラーコードをRGBの配列に変換
         
@@ -50,7 +50,8 @@ class SemiOrderController extends Controller{
         $data = SuzuriAPI::makeRequest($textureUrl, $design, $item, $color_hex);
    
         $result = SuzuriAPI::sendRequest('POST', 'https://suzuri.jp/api/v1/materials', $data);
-        
+        File::delete($textureUrl);
+
         return view('pages.make', compact('result'));
     }
     

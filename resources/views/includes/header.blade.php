@@ -13,12 +13,8 @@
         
     <div class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item" href="https://suzuri.jp/yukyu_konpeki_dou">
+            <a class="navbar-item" href="https://suzuri.jp/BECCHU">
                 <p class="is-size-5">OnlineStore</p>
-            </a>
-
-            <a class="navbar-item" href="https://yu-9.work/#contact">
-                <p class="is-size-5">Contact</p>
             </a>
         </div>
     </div>

@@ -1,3 +1,7 @@
+.is-row-reverse{
+  flex-direction:row-reverse;
+}
+
 /*! bulma.io v0.9.1 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 @-webkit-keyframes spinAround {

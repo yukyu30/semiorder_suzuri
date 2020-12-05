@@ -15,3 +15,35 @@ $link: $sred;
 .is-row-reverse{
     flex-direction:row-reverse;
 }
+.terms{
+    color: $sblack;
+    h1{
+        font-weight: $weight-bold;
+    }
+    h2{
+        font-weight: $weight-semibold;
+        font-size: $size-4;
+        padding-top: $size-4;
+        padding-bottom: $size-7/2;
+    }
+    ul {
+        display: block;
+        list-style-type: disc;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 40px;
+    }
+    li {
+        display: list-item;
+        text-align: -webkit-match-parent;
+    }
+
+}
+.footer{
+    color:hsl(0, 0%, 21%);
+    a{
+        color:hsl(0, 0%, 48%);
+    }
+}

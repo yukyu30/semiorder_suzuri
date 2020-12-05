@@ -41,9 +41,8 @@
     <div class="column is-8">
         <div class="box has-text-centered">
             <h1 class="title">作成を始める</h1>
-            <p><a>利用規約を確認する(未整備)</a></p><br>
-            <p>本ウェブサイトのご利用に起因するソフトウェア，ハードウェア上の事故および不具合，その他損害について責任を負いません</p>
             <p>当サイトはSUZURI APIを利用して作成されており、SUZURI非公式のサイトとなっています</p><br>
+            <p><a href="{{ url('/terms')}}">利用規約を確認する</a></p><br>
             <a href="{{ url('/create') }}"> <button class="button">利用規約に同意して作成を始める</button></a>
         </div>        
     </div>

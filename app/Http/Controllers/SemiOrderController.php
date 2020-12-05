@@ -14,11 +14,13 @@ use App\Lib\ImageProc;
 class SemiOrderController extends Controller{
 
     
-
     public function index(){
         return view( 'pages.index' );
     }
 
+    public function terms(){
+        return view( 'pages.terms' );
+    }
     public function create( Request $parameter ) {
 
         if( is_null($parameter->input( 'item' )) ){//アイテムを選択していない場合

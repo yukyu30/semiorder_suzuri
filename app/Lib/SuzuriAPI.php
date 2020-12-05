@@ -34,7 +34,7 @@
                     'products' => [array(
                         'itemId' => $item->id,
                         'published' => true,
-                        'description' => 'BECCHUにてデザインされた' . $design->title . 'アイテムです.BECCHUで自分好みにカスタマイズしませんか？http://becchu.yu-9.work/'
+                        'description' => 'BECCHUにてデザインされた' . $design->title . 'アイテムです.BECCHUで自分好みにカスタマイズしませんか？http://becchu.yu-9.work/',
                     )],
                 ],
             ];

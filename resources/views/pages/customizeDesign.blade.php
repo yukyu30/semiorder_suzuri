@@ -10,7 +10,7 @@
     </div>
 </div>
 <div class="columns m-4 is-centered">
-    <div class="column is-5 has-text-centered">
+    <div class="column is-3 has-text-centered">
         <div class="has-background-white m-3">
             <p class="image">
                 <img src="{{asset('/orignal/' . $design->file_path)}}">
@@ -23,7 +23,7 @@
         <form method="GET" action="{{ url('/make') }}">
             <div class="field is-horizontal">
                 <div>
-                    <label class="label has-text-primary">メインカラー</label>
+                    <label class="label has-text-primary">メインカラー(灰色の領域)</label>
                 </div>
                 <div class="field-body">
                     <div class="field">

@@ -45,9 +45,9 @@ class SemiOrderController extends Controller{
         
         $generatedImage = ImageProc::changeColor($imageUrl, $color); //画像処理
 
-        $textureUrl = ImageProc::saveImage($generatedImage, 'generate', $design->uuid, $color_hex);//画像を保存し、そのパスを返す
-        
-        $data = SuzuriAPI::makeRequest($textureUrl, $design, $item, $color_hex);
+        $textureUrl = ImageProc::saveImage($generatedImage, 'generate', $design->uuid,  mb_substr($color_hex, 1));//画像を保存し、そのパスを返す
+
+        $data = SuzuriAPI::makeRequest(asset($textureUrl), $design, $item, $color_hex);
    
         $result = SuzuriAPI::sendRequest('POST', 'https://suzuri.jp/api/v1/materials', $data);
         File::delete($textureUrl);

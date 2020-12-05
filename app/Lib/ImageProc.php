@@ -1,5 +1,6 @@
 <?php 
     namespace App\Lib;
+    use Illuminate\Support\Facades\Storage;
     class ImageProc{
         public static function changeColor($imageUrl, $color){
         $imageSize = getimagesize($imageUrl);
@@ -12,12 +13,13 @@
         }
 
         public static function saveImage($image, $storge, $prefix, $suffix){
-            header('Content-Type: image/png');
             $imageName = $prefix . $suffix . '.png';
             $textureUrl='./dump/'. $imageName; // asset関数を使うと保存できないため使わない
-            imagepng($image, $textureUrl);//画像として保存
+            imagesavealpha($image, TRUE);
+            header('Content-Type: image/png');
+            $hasCreated = imagepng($image, $textureUrl);//画像として保存
             imagedestroy($image);
-            return asset('./dump/'. $imageName);
+            return 'dump/' . $imageName;
         }
     }
 ?>
